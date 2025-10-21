@@ -1,24 +1,43 @@
 import FoodCard from "./FoodCard"
+import TailButton from "../components/TailButton";
 import fooddata from "./fooddata.json"
 import { useState } from "react"
 
+//카테고리
+const categories = [
+  ...new Set(fooddata.map(item => item["운영주체 분류"].replaceAll(' ', '')))
+] ;
+// console.log("categories" , categories)
+
 export default function Food() {
-  const [tags, setTags] = useState([]) ;
-  const fdata = {
-    "구분": "기초푸드마켓",
-    "시군구": "남구",
-    "사업장명": "남구기초푸드마켓",
-    "신고기준": "당연",
-    "사업장 소재지": "부산시 남구 못골로53번길 12-20(대연동)",
-    "연락처(대표번호)": "051-638-1377",
-    "팩스번호": "051-638-1378",
-    "운영주체 분류": "3.사단법인",
-    "운영주체명": "사단법인 둥지복지마을"
+  const [foodFilterData, setFoodFilterData] = useState(fooddata);
+
+  const handleShowAll = () => {
+    console.log("all")
+    setFoodFilterData(fooddata) ;
   }
 
+  const handleShowCategory = (ct) => { 
+    let tm = fooddata.filter(item => item["운영주체 분류"].replaceAll(' ', '') === ct) ;
+    setFoodFilterData(tm)
+  }
   return (
-    <div>
-      <FoodCard data={fdata}/>
+    <div className="w-full h-full mt-10
+                    flex flex-col justify-start items-center">
+      <div className="w-9/10 border border-blue-300 p-5 my-5 
+                      flex justify-center items-center">
+        <TailButton color="lime" caption="전체" onHandle={handleShowAll} />
+        {
+          categories.map(item =>  <TailButton key={item}
+                                              color="blue" 
+                                              caption={item} 
+                                              onHandle={() => handleShowCategory(item)} />)
+        }
+      </div>
+      <div className="w-9/10 grid grid-cols-1 lg:grid-cols-2 gap-6 mt-5">
+        {foodFilterData.map((item, idx) => <FoodCard key={item["연락처(대표번호)"] + idx}
+                                               data={item} />)}
+      </div>
     </div>
   )
 }

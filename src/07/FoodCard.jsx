@@ -15,13 +15,13 @@ export default function FoodCard({data}) {
     <div className="w-full h-44 flex justify-start items-start
                     border border-gray-400
                     rounded-sm">
-      <div className="w-1/3 px-5 py-2 flex justify-center">
+      <div className="w-44 h-full px-5 py-2 flex justify-center">
         <img src={
                     data['구분'] == "광역지원센터" ? busan : 
                     data['구분'] == "기초푸드뱅크" ? bank : market
                   } 
              alt={data['구분']} 
-             className="w-6/10 h-1/2"/>
+             className="w-30 h-30"/>
       </div>
       <div className="w-2/3 h-full flex flex-col justify-between py-2">
         <div>
