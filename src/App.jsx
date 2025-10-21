@@ -14,7 +14,7 @@ function App() {
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <MyEffect />
+        <MyClock />
       </main>
       <Footer />
     </div>
