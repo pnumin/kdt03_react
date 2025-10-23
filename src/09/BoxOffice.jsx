@@ -26,19 +26,32 @@ export default function BoxOffice() {
     setInfo(tm) ;
   }
 
-  const getFetchData = (dt) => {
+  // const getFetchData = (dt) => {
+  //   const apiKey = import.meta.env.VITE_MV_API;
+
+  //   const baseUrl = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?' ;
+  //   let url = `${baseUrl}key=${apiKey}&targetDt=${dt}` ;
+  //   console.log(url)
+
+  //   fetch(url)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setTrs(data.boxOfficeResult.dailyBoxOfficeList)
+  //   })
+  //   .catch(err => console.log(err));
+  // }
+
+  const getFetchData = async (dt) => {
     const apiKey = import.meta.env.VITE_MV_API;
 
     const baseUrl = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?' ;
     let url = `${baseUrl}key=${apiKey}&targetDt=${dt}` ;
     console.log(url)
 
-    fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-      setTrs(data.boxOfficeResult.dailyBoxOfficeList)
-    })
-    .catch(err => console.log(err));
+    const resp = await fetch(url) ;
+    const data = await resp.json() ;
+    setTrs(data.boxOfficeResult.dailyBoxOfficeList) ;
+  
   }
 
   //컴포넌트 생성시 한번
