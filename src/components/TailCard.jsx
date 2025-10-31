@@ -6,9 +6,13 @@ export default function TailCard({ imgurl, title, subtitle, tag }) {
     tags = tags.map(kw => <span key={kw} 
                           className="bg-amber-50 rounded-sm p-2 inline-flex m-1 text-sm">
                               {kw}
-                          </span>)
+                          </span>) ;
+    if (tags.length >= 4 ) tags = tags.slice(0, 5) ;
   }
-  else tags = tag ;
+  else {
+    tags = <span className="bg-amber-50 rounded-sm p-2 flex m-1 text-sm h-14" >
+                {tag}</span>
+    } ;
 
   // console.log(tags)
   return (
