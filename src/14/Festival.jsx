@@ -8,7 +8,10 @@ export default function Festival() {
   const selRef = useRef(); 
 
   const handleChange = () => {
-    if (selRef.current.value == "") return ;
+    if (selRef.current.value == ""){
+      setAreaFestival([]) ;
+      return ;
+    } 
 
     let tm = tdata.filter(item => item.GUGUN_NM == selRef.current.value) ;
     setAreaFestival(tm) ;
