@@ -1,11 +1,40 @@
+import { Link } from "react-router-dom"
 export default function Header() {
   return (
     <header className='bg-blue-600 text-white shadow-md'>
       <nav className='container h-16 mx-auto flex justify-between items-center'>
         <div className='text-2xl font-bold text-blue-50'>KDT03</div>
         <ul className='flex space-x-4'>
-          <li className='hover:font-bold'>홈</li>
-          <li className='hover:font-bold'>로또</li>
+          <li>
+            <Link to="/"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    홈
+            </Link>
+          </li>
+          <li>
+            <Link to="/lotto"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    로또
+            </Link>
+          </li>
+          <li>
+            <Link to="/box"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    박스오피스
+            </Link>
+          </li>
+          <li>
+            <Link to="/gallery"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    관광사진
+            </Link>
+          </li>
+          <li>
+            <Link to="/festival"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    부산축제
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
