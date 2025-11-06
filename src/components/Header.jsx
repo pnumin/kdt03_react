@@ -35,6 +35,12 @@ export default function Header() {
                     부산축제
             </Link>
           </li>
+          <li>
+            <Link to="/ChargerInfo"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    전기자동차
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
