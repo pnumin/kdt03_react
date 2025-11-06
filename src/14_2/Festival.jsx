@@ -1,24 +1,22 @@
 import { useState, useEffect, useRef } from "react"
 import TailCard from "../components/TailCard"
-import { Link , useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Festival() {
   const [tdata, setTdata] = useState([]) ;
   const [area, setArea] = useState([]) ;
   const [areaFestival, setAreaFestival] = useState([]) ;
-  const [gu, setGu] = useState() ;
-
   const selRef = useRef(); 
-  const [sParams] = useSearchParams() ;
-   
+
   const handleChange = () => {
-    setGu(selRef.current.value) ;
     if (selRef.current.value == ""){
       setAreaFestival([]) ;
       return ;
     } 
+
     let tm = tdata.filter(item => item.GUGUN_NM == selRef.current.value) ;
     setAreaFestival(tm) ;
+
   }
 
   const getFetchData = async () => {
@@ -39,20 +37,6 @@ export default function Festival() {
   }, []);
 
   useEffect(() => {
-    // console.log(selRef.current.value)
-    if (sParams.get("gu") != "") {
-      console.log(sParams.get("gu"))
-      selRef.current.value = sParams.get("gu") ;
-      setGu(sParams.get("gu"));
-      handleChange();
-    }
-    else {
-      setGu('') ;
-      setAreaFestival([]) ;
-    }
-  } , [sParams, area]);
-
-  useEffect(() => {
     if (tdata.length == 0) return ;
 
     let tm = tdata.map(item => item.GUGUN_NM) ;
@@ -61,7 +45,6 @@ export default function Festival() {
                                 value={item}>
                                   {item}
                         </option>)
-    
     setArea(tm)
   } , [tdata]) ;
 
@@ -76,7 +59,6 @@ export default function Festival() {
             <div className="w-9/10 flex justify-center items-center">
               <select name="sel1"
                       ref= {selRef}
-                      value={gu ?  gu : ""}
                       className="w-1/3 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg
                                  focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
                       onChange={handleChange}>

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TailButton from "../components/TailButton";
 
 export default function FestivalContents() {
@@ -8,7 +8,7 @@ export default function FestivalContents() {
 
   const navigate = useNavigate();
   const handleHome = () => {
-    navigate(`/festival?gu=${item.GUGUN_NM}`);
+    navigate('/festival');
   }
 
   const kakaoMapUrl = `https://map.kakao.com/link/map/${item?.MAIN_PLACE.replace(',','').replace(' ','')},${item?.LAT},${item?.LNG}`;
@@ -46,6 +46,8 @@ export default function FestivalContents() {
         </div>
       </div>
       </div>
+
+
 
       <div className="w-full flex justify-center items-center mt-5">
         <TailButton caption="목록으로" color="blue" onHandle={handleHome} />
