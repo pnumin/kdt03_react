@@ -2,6 +2,7 @@ import zcode from "./data/zcode.json"
 import zscode from "./data/zscode.json"
 import kind from "./data/kind.json"
 import kinddetail from "./data/kinddetail.json"
+import stat from "./data/stat.json"
 
 import TailSelect from "../components/TailSelect"
 import TailButton from "../components/TailButton"
@@ -102,6 +103,8 @@ export default function ChargerInfo() {
       return ;
     }
 
+    setTdata([]) ;
+    setIsLoding(false) ;
     getFetchData() ;
   }
 
@@ -157,15 +160,22 @@ export default function ChargerInfo() {
       </div>
       {
         (tdata.length != 0) && 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mt-5">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5">
           <ChargerCard color="orange" title="충전소수" num={tdata.length} />
+          {
+            Object.keys(stat).map(scode => <ChargerCard key={stat[scode]+scode}
+                                                        color="blue" 
+                                                        title={stat[scode]}
+                                                        num={tdata.filter(item => item.stat == scode).length} />)
+          }
+
         </div>
       }
       {
         isLoding && 
-        <p className="w-full text-2xl text-blue-700 font-bold p-5 mb-4 text-center">
-          로딩중...
-        </p>
+        <div className="w-full p-5 mb-4 flex justify-center items-center">
+          <img src="/img/loading.gif" alt="로딩중" />
+        </div>
       }
     </div>
    
