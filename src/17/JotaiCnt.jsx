@@ -1,6 +1,12 @@
-import TailButton from "../components/TailButton"
+import { cntAtom } from "./atomsCnt";
+import JotaiBt from "./JotaiBt"; 
+import { useAtomValue } from "jotai";
+import { cntAtom, dbCntAtom } from "./atomsCnt";
 
 export default function JotaiCnt() {
+  const cnt  = useAtomValue(cntAtom) ;
+  const dbCnt  = useAtomValue(dbCntAtom) ;
+ 
   return (
     <div className="w-full max-w-3xl mx-auto">
       <h1 className="mt-10 text-3xl font-bold text-center">
@@ -11,17 +17,14 @@ export default function JotaiCnt() {
                       flex flex-col justify-start items-center
                       p-4 my-8 text-2xl font-bold">
         <div>
-          count : 
+          count : {cnt}
         </div>    
         <div>
-          double count : 
+          double count : {dbCnt}
         </div>                
       </div>
-
-      <div className="w-full flex justify-center">
-        <TailButton caption="증가" color="blue" onHandle={()=>{}} />
-        <TailButton caption="감소" color="orange" onHandle={()=>{}} />
-      </div>
+      <JotaiBt />
+      
     </div>
   )
 }

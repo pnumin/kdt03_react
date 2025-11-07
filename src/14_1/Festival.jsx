@@ -2,39 +2,39 @@ import { useState, useEffect, useRef } from "react"
 import TailCard from "../components/TailCard"
 import { Link } from "react-router-dom";
 
+import { Suspense } from "react";
+
+import { useAtom } from "jotai";
+import { selGuAtom, festivalFetchData } from "./atomFestival";
+
 export default function Festival() {
-  const [tdata, setTdata] = useState([]) ;
+  return (
+  <Suspense fallback="<div>로딩중...</div>">
+    <FestivalContent />
+  </Suspense>
+  );
+}
+ 
+
+function FestivalContent() {
+  const [tdata] = useAtom(festivalFetchData) ;
+  const [gu, setGu] = useAtom(selGuAtom) ;
   const [area, setArea] = useState([]) ;
   const [areaFestival, setAreaFestival] = useState([]) ;
   const selRef = useRef(); 
 
   const handleChange = () => {
-    if (selRef.current.value == ""){
-      setAreaFestival([]) ;
-      return ;
-    } 
-
-    let tm = tdata.filter(item => item.GUGUN_NM == selRef.current.value) ;
-    setAreaFestival(tm) ;
-
-  }
-
-  const getFetchData = async () => {
-    const apikey = import.meta.env.VITE_API_KEY ;
-    const baseUrl = 'https://apis.data.go.kr/6260000/FestivalService/getFestivalKr?' ;
-    let url = `${baseUrl}serviceKey=${apikey}`;
-    url = `${url}&pageNo=1&numOfRows=45&resultType=json`;
-
-    // console.log(url)
-
-    const resp = await fetch(url) ;
-    const data = await resp.json() ;
-    setTdata(data.getFestivalKr.item)
+    setGu(selRef.current.value) ;
   }
 
   useEffect(() => {
-    getFetchData();
-  }, []);
+    if (!gu) {
+      setAreaFestival([]) ;
+    } else {
+       let tm = tdata.filter(item => item.GUGUN_NM == gu) ;
+       setAreaFestival(tm) ;
+    }
+  }, [gu, tdata])
 
   useEffect(() => {
     if (tdata.length == 0) return ;
@@ -48,6 +48,8 @@ export default function Festival() {
     setArea(tm)
   } , [tdata]) ;
 
+
+
   return (
     <div className="w-full h-full flex flex-col justify-start items-center">
           <div className="w-9/10 p-5 h-1/4
@@ -59,6 +61,7 @@ export default function Festival() {
             <div className="w-9/10 flex justify-center items-center">
               <select name="sel1"
                       ref= {selRef}
+                      value={gu}
                       className="w-1/3 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg
                                  focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
                       onChange={handleChange}>
