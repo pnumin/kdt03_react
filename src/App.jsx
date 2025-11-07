@@ -19,6 +19,7 @@ import RouteMain from './15/RouteMain'
 import FestivalContents from './14/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
 import ChargerDetail from './16/ChargerDetail'
+import JotaiCnt from './17/JotaiCnt'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path='/festival/contents' element={<FestivalContents />} />
             <Route path='/ChargerInfo' element={<ChargerInfo />} /> 
             <Route path='/ChargerInfo/detail' element={<ChargerDetail />} /> 
+            <Route path='/jotai' element={<JotaiCnt />} /> 
           </Routes>
         </main>
         <Footer />
