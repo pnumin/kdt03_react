@@ -7,15 +7,17 @@ import stat from "./data/stat.json"
 import TailSelect from "../components/TailSelect"
 import TailButton from "../components/TailButton"
 import ChargerCard from "./ChargerCard"
+import ChargerStat from "./ChargerStat"
 
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function ChargerInfo() {
   //상태변수
-  const [tdata, setTdata] = useState([]) ;
+  const [tdata, setTdata] = useState([]);
   const [zsc, setZsc] = useState(null);
   const [kindDetail, setKindDetail] = useState(null);
-  const [isLoding, setIsLoding] = useState(false) ;
+  const [isLoding, setIsLoding] = useState(false);
 
   //select 박스 
   const sel1Ref = useRef();
@@ -25,28 +27,34 @@ export default function ChargerInfo() {
 
   //데이터가져오기
   const getFetchData = async () => {
-    const apikey = import.meta.env.VITE_API_KEY ;
-    const baseUrl = `http://apis.data.go.kr/B552584/EvCharger/getChargerInfo?` ;
-    let url = `${baseUrl}serviceKey=${apikey}` ;
-    url = `${url}&numOfRows=100&pageNo=1` ;
-    url = `${url}&zcode=${sel1Ref.current.value}&zscode=${sel2Ref.current.value}` ;
+    const apikey = import.meta.env.VITE_API_KEY;
+    const baseUrl = `http://apis.data.go.kr/B552584/EvCharger/getChargerInfo?`;
+    let url = `${baseUrl}serviceKey=${apikey}`;
+    url = `${url}&numOfRows=100&pageNo=1`;
+    url = `${url}&zcode=${sel1Ref.current.value}&zscode=${sel2Ref.current.value}`;
     url = `${url}&kind=${sel3Ref.current.value}&kindDetail=${sel4Ref.current.value}`;
     url = `${url}&dataType=JSON`;
-
-    setIsLoding(true) ;
-    const resp = await fetch(url) ;
-    const data = await resp.json() ;
-  
-    setTdata(data.items.item) ;
-    setIsLoding(false) ;
     console.log(url)
+
+    setIsLoding(true);
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+
+      setTdata(data.items.item);
+    } catch (error) {
+      console.log(error)
+    }
+    finally {
+      setIsLoding(false);
+    }
   }
 
   //시도 선택
   const handleZcode = () => {
-    setZsc(null) ; 
-    setTdata([]) ;
-    setIsLoding(false) ;
+    setZsc(null);
+    setTdata([]);
+    setIsLoding(false);
 
     if (sel1Ref.current.value == "")
       setZsc(null);
@@ -56,9 +64,9 @@ export default function ChargerInfo() {
 
   //충전소 구분
   const handleKind = () => {
-    setKindDetail(null) ;
-    setTdata([]) ;
-    setIsLoding(false) ;
+    setKindDetail(null);
+    setTdata([]);
+    setIsLoding(false);
 
     console.log(sel3Ref.current.value, kinddetail[sel3Ref.current.value])
     if (sel3Ref.current.value == "")
@@ -69,49 +77,49 @@ export default function ChargerInfo() {
 
   //취소 
   const handleCancel = () => {
-    sel1Ref.current.value = "" ;
-    sel2Ref.current.value = "" ;
-    sel3Ref.current.value = "" ;
-    sel4Ref.current.value = "" ;
+    sel1Ref.current.value = "";
+    sel2Ref.current.value = "";
+    sel3Ref.current.value = "";
+    sel4Ref.current.value = "";
 
-    setZsc(null) ;
-    setKindDetail(null) ;
-    setTdata([]) ;
-    setIsLoding(false) ;
+    setZsc(null);
+    setKindDetail(null);
+    setTdata([]);
+    setIsLoding(false);
   }
 
   //검색
   const handleSearch = () => {
     if (sel1Ref.current.value == "") {
       alert("시도를 선택하세요.");
-      sel1Ref.current.focus() ;
-      return ;
+      sel1Ref.current.focus();
+      return;
     }
     if (sel2Ref.current.value == "") {
       alert("지역동을 선택하세요.");
-      sel2Ref.current.focus() ;
-      return ;
+      sel2Ref.current.focus();
+      return;
     }
     if (sel3Ref.current.value == "") {
       alert("충전소 구분을 선택하세요.");
-      sel3Ref.current.focus() ;
-      return ;
+      sel3Ref.current.focus();
+      return;
     }
     if (sel4Ref.current.value == "") {
       alert("충전소 상세를 선택하세요.");
-      sel4Ref.current.focus() ;
-      return ;
+      sel4Ref.current.focus();
+      return;
     }
 
-    setTdata([]) ;
-    setIsLoding(false) ;
-    getFetchData() ;
+    setTdata([]);
+    setIsLoding(false);
+    getFetchData();
   }
 
 
   // fetch가 완료되면
-  useEffect(()=>{
-    if (tdata.length == 0) return ;
+  useEffect(() => {
+    if (tdata.length == 0) return;
 
     console.log(tdata)
   }, [tdata]);
@@ -122,62 +130,77 @@ export default function ChargerInfo() {
         전기차 충전소 정보
       </h1>
 
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">   
-        <TailSelect id="sel1" 
-                    ref={sel1Ref}
-                    title="시도" 
-                    opk={Object.keys(zcode)}
-                    opv={Object.values(zcode)}
-                    onHandle={handleZcode}
-                    />
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+        <TailSelect id="sel1"
+          ref={sel1Ref}
+          title="시도"
+          opk={Object.keys(zcode)}
+          opv={Object.values(zcode)}
+          onHandle={handleZcode}
+        />
 
-        <TailSelect id="sel2" 
-                    ref={sel2Ref}
-                    title="지역동" 
-                    opk={zsc ? Object.values(zsc) : ""}
-                    opv={zsc ? Object.keys(zsc) : ""}
-                    onHandle={() => {}}
-                    />
-    
-         <TailSelect id="sel3" 
-                    ref={sel3Ref}
-                    title="충전소구분" 
-                    opk={Object.keys(kind)}
-                    opv={Object.values(kind)}
-                    onHandle={handleKind}
-                    />
+        <TailSelect id="sel2"
+          ref={sel2Ref}
+          title="지역동"
+          opk={zsc ? Object.values(zsc) : ""}
+          opv={zsc ? Object.keys(zsc) : ""}
+          onHandle={() => { }}
+        />
 
-        <TailSelect id="sel4" 
-                    ref={sel4Ref}
-                    title="충전소 상세" 
-                    opk={kindDetail ? Object.values(kindDetail) : ""}
-                    opv={kindDetail ? Object.keys(kindDetail) : ""}
-                    onHandle={() => {}}
-                    />
+        <TailSelect id="sel3"
+          ref={sel3Ref}
+          title="충전소구분"
+          opk={Object.keys(kind)}
+          opv={Object.values(kind)}
+          onHandle={handleKind}
+        />
+
+        <TailSelect id="sel4"
+          ref={sel4Ref}
+          title="충전소 상세"
+          opk={kindDetail ? Object.values(kindDetail) : ""}
+          opv={kindDetail ? Object.keys(kindDetail) : ""}
+          onHandle={() => { }}
+        />
 
         <TailButton caption="검색" color="blue" onHandle={handleSearch} />
-        <TailButton caption="취소" color="orange" onHandle={handleCancel} /> 
+        <TailButton caption="취소" color="orange" onHandle={handleCancel} />
       </div>
       {
-        (tdata.length != 0) && 
+        (tdata.length != 0) &&
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5">
           <ChargerCard color="orange" title="충전소수" num={tdata.length} />
           {
-            Object.keys(stat).map(scode => <ChargerCard key={stat[scode]+scode}
-                                                        color="blue" 
-                                                        title={stat[scode]}
-                                                        num={tdata.filter(item => item.stat == scode).length} />)
+            Object.keys(stat).map(scode => <ChargerCard key={stat[scode] + scode}
+              color="blue"
+              title={stat[scode]}
+              num={tdata.filter(item => item.stat == scode).length} />)
           }
 
         </div>
       }
       {
-        isLoding && 
+        (tdata.length != 0) &&
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mt-5">
+          {
+            tdata.map((item, idx) => <Link to="/ChargerInfo/detail"
+                                            key={item.statId + idx}
+                                            state={{ item: item }}>
+                                            <ChargerStat key={item.statId}
+                                                        statNm={`${item.statNm}(${item.chgerId})`} />
+                                      </Link>
+            )
+          }
+
+        </div>
+      }
+      {
+        isLoding &&
         <div className="w-full p-5 mb-4 flex justify-center items-center">
           <img src="/img/loading.gif" alt="로딩중" />
         </div>
       }
     </div>
-   
+
   )
 }

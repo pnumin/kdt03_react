@@ -18,6 +18,7 @@ import Festival from './14/Festival'
 import RouteMain from './15/RouteMain'
 import FestivalContents from './14/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
+import ChargerDetail from './16/ChargerDetail'
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/festival' element={<Festival />} />
             <Route path='/festival/contents' element={<FestivalContents />} />
-            <Route path='/ChargerInfo' element={<ChargerInfo />} />
+            <Route path='/ChargerInfo' element={<ChargerInfo />} /> 
+            <Route path='/ChargerInfo/detail' element={<ChargerDetail />} /> 
           </Routes>
         </main>
         <Footer />

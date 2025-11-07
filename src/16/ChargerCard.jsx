@@ -13,7 +13,7 @@ export default function ChargerCard({color, title, num}) {
         {title}
       </p>
       <p className="text-2xl font-bold">
-        {num}
+        {num}개
       </p>
     </div>
   )
