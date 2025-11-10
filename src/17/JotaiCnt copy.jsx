@@ -1,3 +1,4 @@
+import { cntAtom } from "./atomsCnt";
 import JotaiBt from "./JotaiBt"; 
 import { useAtomValue } from "jotai";
 import { cntAtom, dbCntAtom } from "./atomsCnt";

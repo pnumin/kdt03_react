@@ -14,7 +14,6 @@ export default function Festival() {
   </Suspense>
   );
 }
- 
 
 function FestivalContent() {
   const [tdata] = useAtom(festivalFetchData) ;

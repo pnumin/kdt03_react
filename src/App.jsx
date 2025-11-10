@@ -20,6 +20,7 @@ import FestivalContents from './14_1/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
 import ChargerDetail from './16/ChargerDetail'
 // import JotaiCnt from './17/JotaiCnt'
+import TodoList from './18/TodoList'
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
             <Route path='/festival/contents' element={<FestivalContents />} />
             <Route path='/ChargerInfo' element={<ChargerInfo />} /> 
             <Route path='/ChargerInfo/detail' element={<ChargerDetail />} /> 
-            {/* <Route path='/jotai' element={<JotaiCnt />} />  */}
+            <Route path='/todolist' element={<TodoList />} /> 
           </Routes>
         </main>
         <Footer />

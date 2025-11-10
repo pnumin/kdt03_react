@@ -41,6 +41,12 @@ export default function Header() {
                     전기자동차
             </Link>
           </li>
+           <li>
+            <Link to="/todolist"
+                   className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
+                    할일목록
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
