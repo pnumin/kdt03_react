@@ -46,7 +46,7 @@ export default function TodoItem({todo}) {
                         rounded-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
-               : <span className="flex-1 p-2">
+               : <span className={`flex-1 p-2 ${ todo.completed ? "line-through" : ""}`}>
                   {todo.text}
                 </span>
       }
