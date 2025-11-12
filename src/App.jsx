@@ -20,7 +20,7 @@ import FestivalContents from './14_1/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
 import ChargerDetail from './16/ChargerDetail'
 // import JotaiCnt from './17/JotaiCnt'
-import TodoList from './18/TodoList'
+import TodoList from './18_1/TodoList'
 
 function App() {
   return (
