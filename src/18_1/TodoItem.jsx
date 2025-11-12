@@ -1,21 +1,22 @@
 import TailButton from "../components/TailButton"
 import { useState } from "react";
 
-export default function TodoItem({todo}) {
-  // const setTodos = useSetAtom(todosAtom) ;
+export default function TodoItem({todo, todos, setTodos}) {
   const [isEdit , setIsEdit] = useState(false) ;
   const [editText, setEditText] = useState(todo.text) ;
   
   const handleToggle = () => {
-    // setTodos(
-    //   prev => prev.map( t => t.id == todo.id ? { ...t , completed : !todo.completed} : t) 
-    // ) ;
+    const newItem = todos.map( t => t.id == todo.id 
+                                              ? { ...t , completed : !todo.completed} 
+                                              : t) ;
+    setTodos(newItem)    ;  
   }
 
   const handleSave = () => {
-    // setTodos(
-    //   prev => prev.map( t => t.id == todo.id ? { ...t ,  text : editText} : t) 
-    // ) ;
+    const newItem = todos.map( t => t.id == todo.id 
+                                              ? { ...t ,  text : editText} 
+                                              : t) 
+    setTodos(newItem) ;  
     setIsEdit(false) ;
   }
 
@@ -25,9 +26,8 @@ export default function TodoItem({todo}) {
   }
 
   const handleDelete = () => {
-    // setTodos( 
-    //   prev => prev.filter( t => t.id != todo.id)
-    // )
+    const newItem = todos.filter( t => t.id != todo.id) ;
+    setTodos(newItem) ;  
   }
   return (
     <div className="w-full max-w-3xl flex justify-center items-center 

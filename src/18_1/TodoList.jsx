@@ -9,21 +9,22 @@ export default function TodoList() {
 
   // console.log(todos)
 
+  const handleSave = (newItem) =>{
+    setTodos(newItem) ;
+    localStorage.setItem("todo", JSON.stringify(newItem)) ;
+  }
+
   useEffect(() =>{
-    // const newItem = [{
-    //   id: 1,
-    //   text: "리액트 공부",
-    //   completed : false
-    // }];
-
-    //자바스크립 객체 -> 문자열 : JSON.stringify()
-    // localStorage.setItem("todo", JSON.stringify(newItem)) ;
-
     //문자열 -> 자바스크립트 객체 : JSON.parse()
-    const todos = JSON.parse(localStorage.getItem("todo")) ;
-    console.log(todos[0].text)
-
+    const localTodos = JSON.parse(localStorage.getItem("todo")) || [];
+    setTodos(localTodos)
   } , []);
+
+  useEffect(() => {
+    setCompleted(todos.filter(todo => todo.completed).length);
+    setInCompleted(todos.filter(todo => !todo.completed).length)
+  } , [todos]);
+
   return (
     <div className="w-full flex flex-col justify-start items-center">
       <h1 className="w-full max-w-3xl text-2xl font-bold text-center mt-10">
@@ -36,10 +37,11 @@ export default function TodoList() {
         완료 : {completed} 개 | 
         미완료: {incompleted} 개
       </div>
-      <TodoInput />
-      {/* { 
-        todos.map (todo => <TodoItem key={todo.id} todo={todo} />)
-      } */}
+      <TodoInput todos={todos} setTodos={handleSave}/>
+      { 
+        todos.map (todo => <TodoItem key={todo.id} todo={todo}
+                                     todos={todos} setTodos={handleSave} />)
+      }
     </div>
   )
 }

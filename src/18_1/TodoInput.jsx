@@ -1,8 +1,7 @@
 import TailButton from "../components/TailButton"
 import { useRef } from "react";
 
-export default function TodoInput() {
-  // const setTodos = useSetAtom(todosAtom) ;
+export default function TodoInput({todos, setTodos}) {
   const inRef = useRef() ;
 
   const handleAdd = () => {
@@ -17,7 +16,7 @@ export default function TodoInput() {
       text:inRef.current.value,
       completed : false 
     }
-    // setTodos( prev => [newItem, ...prev]) ;
+    setTodos([newItem, ...todos]) ;
     inRef.current.value = "" ;
     inRef.current.focus() ;
   }
