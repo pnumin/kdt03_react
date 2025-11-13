@@ -16,14 +16,14 @@ export default function Gallery() {
   const getFetchData = async () => {
     const apikey = import.meta.env.VITE_API_KEY;
     // const baseUrl = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1?';
-    const baseUrl = '/photo-api/gallerySearchList1?';
+    const baseUrl = '/api/B551011/PhotoGalleryService1/gallerySearchList1?';
     const kw = encodeURI(kwRef.current.value);
     let url = `${baseUrl}serviceKey=${apikey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A`;
     url = `${url}&keyword=${kw}&_type=json`;
 
 
     // url = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1?serviceKey=8qw7g%2FC%2BMGd2iRqEvb%2FEx0Sg3ZwAAsnS%2FQ7rRaU3l4UUYfNWgyAbYpNw541yy9pueEvoCcNwmCww8ss32BBWEA%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&keyword=%EC%84%9C%EC%9A%B8%20%EC%95%BC%EA%B2%BD%20%EC%B6%95%EC%A0%9C&_type=json'
-    // console.log(url)
+    console.log(url)
     const resp = await fetch(url);
     const data = await resp.json();
     setTdata(data.response.body.items.item)

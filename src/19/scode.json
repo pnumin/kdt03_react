@@ -1,0 +1,47 @@
+{
+  "pm10": {
+    "name": "미세먼지",
+    "unit": "㎍/㎥",
+    "description": "미세먼지 측정값"
+  },
+  "co2": {
+    "name": "이산화탄소",
+    "unit": "ppm",
+    "description": "이산화탄소 측정값"
+  },
+  "co": {
+    "name": "일산화탄소",
+    "unit": "ppm",
+    "description": "일산화탄소 측정값"
+  },
+  "no2": {
+    "name": "이산화질소",
+    "unit": "ppm",
+    "description": "이산화질소 측정값"
+  },
+  "no": {
+    "name": "일산화질소",
+    "unit": "ppm",
+    "description": "일산화질소 측정값"
+  },
+  "nox": {
+    "name": "질소산화물",
+    "unit": "ppm",
+    "description": "질소산화물 측정값"
+  },
+  "o3": {
+    "name": "오존",
+    "unit": "ppm",
+    "description": "오존 측정값"
+  },
+  "pm25": {
+    "name": "초미세먼지",
+    "unit": "㎍/㎥",
+    "description": "초미세먼지 측정값"
+  },
+  "fad": {
+    "name": "폼알데하이드",
+    "unit": "㎍/㎥",
+    "description": "폼알데하이드 측정값"
+  }
+}
