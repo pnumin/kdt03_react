@@ -13,7 +13,12 @@ export default defineConfig({
         target: 'https://apis.data.go.kr',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
-      }
+      },
+      '/kobisopenapi': {
+        target: 'https://kobis.or.kr/kobisopenapi',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/kobisopenapi/, '')
+      },
     }
   },
 })
