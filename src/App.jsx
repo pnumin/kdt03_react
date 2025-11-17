@@ -21,7 +21,7 @@ import ChargerInfo from './16/ChargerInfo'
 import ChargerDetail from './16/ChargerDetail'
 // import JotaiCnt from './17/JotaiCnt'
 import TodoList from './18_3/TodoList'
-import Subway from './19/subway'
+import Subway from './19/Subway'
 import Login from './Login'
 
 function App() {
