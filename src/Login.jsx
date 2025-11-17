@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabase/client';
 import { useAtom} from 'jotai';
 import { isLoginAtom } from './atoms/atoms'; 
+
 function Login() {
   // session 상태를 저장하는 state
   const [session, setSession] = useState(null);
@@ -11,6 +12,10 @@ function Login() {
   //로그인 상태 atom 저장
   const [isLogin, setIsLogin] = useAtom(isLoginAtom) ;
   console.log("Login" ,isLogin)
+
+  const redirectUrl = process.env.NODE_ENV === 'production'
+  ? 'https://kdt03-react-2fkt.vercel.app/'
+  : 'http://localhost:5173';
 
 
   // 컴포넌트가 마운트될 때 한 번 실행되는 useEffect
@@ -45,6 +50,9 @@ function Login() {
   const signInWithGithub = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
+      options: {
+        redirectTo: `${redirectUrl}/` // 인증 후 이동할 주소
+      }
     });
   };
 
