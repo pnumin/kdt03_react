@@ -22,6 +22,7 @@ import ChargerDetail from './16/ChargerDetail'
 // import JotaiCnt from './17/JotaiCnt'
 import TodoList from './18_3/TodoList'
 import Subway from './19/subway'
+import Login from './Login'
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Header />
         <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
           <Routes>
-            <Route path='/' element={<MyClock />} />
+            <Route path='/' element={<Login />} />
             <Route path='/lotto' element={<Lotto />} />
             <Route path='/box' element={<BoxOffice />} />
             <Route path='/gallery' element={<Gallery />} />

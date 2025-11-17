@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom"
+import { useAtomValue } from "jotai"
+import { isLoginAtom } from "../atoms/atoms"
+
 export default function Header() {
+  const isLogin = useAtomValue(isLoginAtom) ;
+  console.log("Header", isLogin)
   return (
     <header className='bg-blue-600 text-white shadow-md'>
       <nav className='container h-16 mx-auto flex justify-between items-center'>
@@ -11,6 +16,7 @@ export default function Header() {
                     홈
             </Link>
           </li>
+          {isLogin && <>
           <li>
             <Link to="/lotto"
                    className='hover:font-bold hover:bg-blue-50 p-2 rounded-sm hover:text-blue-900'>
@@ -53,6 +59,8 @@ export default function Header() {
                     부산지하철실내공기
             </Link>
           </li>
+          </>
+          }
         </ul>
       </nav>
     </header>
